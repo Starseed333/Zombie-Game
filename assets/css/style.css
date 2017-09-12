@@ -1,0 +1,56 @@
+body{
+	background-image: url("../images/wd.jpeg");
+	
+	}
+
+
+h1{
+	font-weight: bold;
+	color: white;
+}
+
+
+#range{
+     position: absolute;
+     top:0;left: 0;
+     cursor: crosshair;
+     width: 100%;
+     height: 300px;
+     }
+            
+#img1{
+     position: absolute;
+     top:100px; left:0;
+     border: none;
+     padding: 10px;
+      }
+            
+ #score{
+     font: 16px normal arial, verdana, sans-serif;
+     color: white;
+     font-weight: bold;
+     margin-top: 80px;
+     padding: 50px;
+     z-index: 100;
+            }
+
+#cow1, #cow2, #cow3 {z-index:500;}
+
+#cow1 {position:absolute; bottom:50px; left:;}
+#cow2 {position:absolute; bottom:50px; left:1100px;}
+#cow3 {position:absolute; bottom:50px; left:500px;}
+            
+
+
+button{
+	margin-top: 700px;
+	margin-left: 10px;
+}
+
+#container{
+	margin-left: 200px;
+}
+
+#query{
+	margin-left: 200px;
+}
