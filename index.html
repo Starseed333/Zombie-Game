@@ -6,16 +6,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- reset -->
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <!-- Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
-    <head>
     <!-- Javascript Animation Library -->
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    
     </head>
 
 
@@ -25,17 +25,20 @@
   
 
 <body>
-    
+    <div class="container">
+    <!-- Player Enter Your Name Section -->
+        <div class="formPanel"> 
+            <form id="name-form">
+                <input type="text" id="name-input" placeholder="Your Name">
+                <input id="add-name" type="submit" value="Submit">
+            </form>
+        </div> <!-- End Player Name Section  -->
 
 
-    <h1 class="animated flash">Ready to Attack!</h1>
-    <!-- Youtube video -->
-    <div id="buttons">
-    <label> <input id="query" value='cats' type="text"/><button id="search-button"    onclick="keyWordsearch()">Search</button></label>    
-    <div id="container">
-    <h1>Search Results</h1>
-    <ul id="results"></ul>
-    </div>           
+  
+
+
+
     <!-- Zombie Field -->
     <div id="range">
              <div id="score"></div>
@@ -55,12 +58,110 @@
     
 
 
+    <!-- Game Data Section -->
+        <div class="panel panel-default">
+            <div class="row"> <!-- Game Data Row -->
+
+                <!-- Player 1 Left Side -->
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="panel panel-default playerPanel" id="playerPanel1">
+                        <div class="panel-heading panelName">
+                            <h3 class="panel-title text-center" id="playerOneName"></h3>
+                        </div>
+
+                        <div class="panel-body panelOption text-center">
+                            <div class="option">Game</div>
+                        </div>
+
+                        <div class="panel-body panelOption text-center">
+                            <div class="option">Score!</div>
+                        </div>
+
+
+                        <div class="panel-body panelStats text-center">
+                            <div class="stats" id="player1Stats"></div>
+                        </div>
+                    </div>
+                </div> <!-- End Player 1-->
+                
+                
 
 
 
 
-<!-- Youtube Api -->
- <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady">   </script>
+                <!-- Game Outcome Section -->
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="panel panel-default gamePanel">
+                        <h3 class="panel-title text-center" id="waitingNotice"></h3>
+                        <h3 class="panel-title text-center" id="roundOutcome">Zombie - Attack</h3>
+                    </div>
+                </div> <!-- End Game Outcome Section -->
+                
+                
+
+
+
+
+                <!-- Player 2 Right Side -->
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="panel panel-default playerPanel" id="playerPanel2">
+                        <div class="panel-heading panelName">
+                            <h3 class="panel-title text-center" id="playerTwoName"></h3>
+                        </div>
+
+                        <div class="panel-body panelOption text-center">
+                            <div class="option">Game</div>
+                        </div>
+
+                        <div class="panel-body panelOption text-center">
+                            <div class="option">Score!</div> 
+                        </div>
+
+
+                        <div class="panel-body panelStats text-center">
+                            <div class="stats" id="player2Stats"></div>
+                        </div>
+                    </div>
+                </div> <!-- End Player 2 Right Side -->
+                
+            </div> <!-- Game Data Row -->
+        </div> <!-- End Game Data Section  -->
+
+ 
+
+
+ <!-- Chat Section -->
+        <div class="row">
+
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div id="chatDisplay"></div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4"> 
+                <div class="chatInput">
+                    <div class="chatLabel">Type Your Message!</div>
+
+                    <div class="chatPanel"> 
+                        <form id="chat-form">
+                            <textarea type="text" id="chat-input"></textarea>
+                            <input id="chat-send" type="submit" value="Send">
+                        </form>
+                    </div>
+                </div>
+            </div> <!-- End Player Name Section  -->
+
+        </div> <!-- End Chat Section  -->
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- JS File -->
 <script src="app.js"></script>
