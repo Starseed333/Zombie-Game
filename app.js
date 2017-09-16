@@ -4,27 +4,92 @@ console.log("inside js");
 // Game Over once 10 hits have been achieved on zombie
 var timer1 = null;
 
-var el = null;
+// var el = null;
 var score = 0; //number of 'hits'
 var shots = 0; //total 'shots'
 var accuracy = 0; // Accuracy of shots to zombie hits
 var zHits = 0; // amount of zombie hits
 var highscores = []; //where we will be saving our highestScore
+var player1 = null;
+var player2 = null;
+var player1Name = "";
+var player2Name = "";
+var yourPlayerName = "";
+var zombieImage = document.getElementById('img1')
 
-
-
-function moveIt() {
-  //animate the image
-  if (parseInt(el.style.left) > (screen.width - 50)) el.style.left = 0;
-  el.style.left = parseInt(el.style.left) + 6 + 'px';
-  el.style.top = 20 + (80 * Math.sin(parseInt(el.style.left) / 50)) + 'px';
-
-  //set the timer1
-  timer1 = setTimeout(moveIt, 25);
+var zombieInterval;
+ 
+function MoveZombie() {
+  zombieInterval = setInterval(moveIt, 25)
 }
 
+function moveIt() {
+  if (parseInt(zombieImage.style.left) > (screen.width - 50)) {
+    zombieImage.style.left = 0;
+  } else {
+    zombieImage.style.left = parseInt(zombieImage.style.left) + 6 + 'px';
+    zombieImage.style.top = 20 + (80 * Math.sin(parseInt(zombieImage.style.left) / 50)) + 'px';
+  } 
+}
 
+function stopZombieMove() {
+  clearInterval(zombieInterval)
+}
 
+function ZombieGame() {
+  MoveZombie()
+
+  this.zombieImage = document.getElementById('img1')
+  var el = document.getElementById("img1");
+
+  //onclick handler calls scoreUp()
+  //when img is clicked
+  // el.onclick = scoreUp;
+  this.zombieImage.addEventListener('click', this.MoveZombie)
+
+  //Update total of number of shots
+  //for every click within play field accuracy is adjusted
+
+  $("#range").on("click", function () {
+    shots++;
+    accuracy = Math.ceil(score / shots * 100);
+    highscores.push(score);
+    Math.max(highscores);
+    //console.log(accuracy);
+    //update scoreboard
+    scoreboard();
+  })
+
+  //Initialize game
+  scoreboard();
+  el.style.left = '50px'
+}
+
+ZombieGame.prototype.MoveZombie = function(event) {
+  scoreUp()
+  //animate the image
+  if (parseInt(this.style.left) > (screen.width - 50)) {
+    this.style.left = 0;
+  } else {
+    this.style.left = parseInt(this.style.left) + 6 + 'px';
+    this.style.top = 20 + (80 * Math.sin(parseInt(this.style.left) / 50)) + 'px';
+  }
+
+  //set the timer1
+}
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyD6xUfqVvTS2xDylNNzQwKGGiH62s9xR_Q",
+  authDomain: "zombie-game-246c3.firebaseapp.com",
+  databaseURL: "https://zombie-game-246c3.firebaseio.com",
+  projectId: "zombie-game-246c3",
+  storageBucket: "zombie-game-246c3.appspot.com",
+  messagingSenderId: "1074907213300"
+};
+firebase.initializeApp(config);
+
+var db = firebase.database()
 
 function scoreUp() {
   //increment the player's score
@@ -50,42 +115,37 @@ function scoreboard() {
     }
 })*/
 
-window.onload = function () {
-  el = document.getElementById("img1");
+// window.onload = function () {
+//   el = document.getElementById("img1");
 
-  //onclick handler calls scoreUp()
-  //when img is clicked
-  el.onclick = scoreUp;
-
-
-  //Update total of number of shots
-  //for every click within play field accuracy is adjusted
-
-  $("#range").on("click", function () {
-    shots++;
-
-    accuracy = Math.ceil(score / shots * 100);
-
-    highscores.push(score);
-    Math.max(highscores);
-    //console.log(accuracy);
-
-    //update scoreboard
-    scoreboard();
-  })
+//   //onclick handler calls scoreUp()
+//   //when img is clicked
+//   el.onclick = scoreUp;
 
 
-  //Initialize game
-  scoreboard();
-  el.style.left = '50px'
+//   //Update total of number of shots
+//   //for every click within play field accuracy is adjusted
 
-  moveIt();
-};
+//   $("#range").on("click", function () {
+//     shots++;
+
+//     accuracy = Math.ceil(score / shots * 100);
+
+//     highscores.push(score);
+//     Math.max(highscores);
+//     //console.log(accuracy);
+
+//     //update scoreboard
+//     scoreboard();
+//   })
 
 
+//   //Initialize game
+//   scoreboard();
+//   el.style.left = '50px'
 
-
-
+//   moveIt();
+// };
 
 //---------------------------DB Listeners-----------------------------
 
@@ -214,15 +274,9 @@ db.ref("/chat/").on("child_added", function (snapshot) {
 
 
 // DB Listener for the game outcome
-db.ref("/outcome/").on("value", function (snapshot) {
+db.ref("/").on("value", function (snapshot) {
   $("#roundOutcome").html(snapshot.val());
 });
-
-
-
-
-
-
 
 
 //-----------------------Beginning of event handler-----------------
@@ -335,4 +389,6 @@ $("#chat-send").on("click", function (event) {
 
 // };
 
-
+document.addEventListener('DOMContentLoaded', function(event) {
+  new ZombieGame()
+})
