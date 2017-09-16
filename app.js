@@ -53,10 +53,12 @@ function moveIt(){
                 score++;
             }
             
-            function scoreboard(){
-                //display the scoreboard
-                document.getElementById("score").innerHTML="Shots: "+shots+" Score: "+score;
-            }
+           // function scoreboard(){
+           //      //display the scoreboard
+                
+           //      $("#player1Stats").html("<h3>Shots: "+shots + " Score: " + score + " </h3>");
+           //      $("#roundOutcome").html("<h3>Accuracy: " + accuracy + "% Highscore: " + highscore + "</h3>");
+           //  }
             
             window.onload=function(){
                 el=document.getElementById("img1");
@@ -67,15 +69,22 @@ function moveIt(){
                 
                 //Update total of number of shots
                 //for every click within play field
-                document.getElementById("range").onclick = function(){
+               $("#range").on("click",function(){
                     shots++;
+
+                    accuracy = Math.ceil(score / shots *100);
+
+                    highscore = score;
+                    
+                    //console.log(accuracy);
                     
                     //update scoreboard
-                    scoreboard();
-                }
+                    // scoreboard();
+                } )
+
                 
                 //Initialize game
-                scoreboard();
+                // scoreboard();
                 el.style.left = '50px'
                 moveIt();
             };
