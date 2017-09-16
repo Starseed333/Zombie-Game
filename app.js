@@ -45,9 +45,9 @@ function moveIt(){
                 timer1=setTimeout(moveIt,25);
             }
             
-
-
             
+            
+
             function scoreUp(){
                 //increment the player's score
                 score++;
@@ -79,6 +79,11 @@ function moveIt(){
                 el.style.left = '50px'
                 moveIt();
             };
+
+
+            
+                
+            
 
 //---------------------------DB Listeners-----------------------------
 
