@@ -9,7 +9,7 @@ var score= 0; //number of 'hits'
 var shots = 0; //total 'shots'
 var accuracy = 0; // Accuracy of shots to zombie hits
 var zHits = 0; // amount of zombie hits
-var highscore = 0; //where we will be saving our highestScore
+var highscores = []; //where we will be saving our highestScore
 
 
             
@@ -33,10 +33,20 @@ var highscore = 0; //where we will be saving our highestScore
             function scoreboard(){
                 //display the scoreboard
                 
-                $("#score").html("<h3>Shots: "+shots + " Score: " + score + " </h3>");
-                $("#stats").html("<h3>Accuracy: " + accuracy + "% Highscore: " + highscore + "</h3>");
+                $("#score").html("<h3>Shots: "+shots + " Score: " + score + " </h3>" + "<h3>Accuracy: " + accuracy + "% Highscore: " + highscores + "</h3>");
+                $("#stats").html();
             }
             
+            /*$("#img1").on("click",function(){
+                shots ++;
+                if (score === 10){
+                    console.log("this maybe working.");
+                    shots = highscores;
+                    accuracy = Math.ceil(score / shots *100);
+                    el=document.getElementById("img1");
+                }
+            })*/
+
             window.onload=function(){
                 el=document.getElementById("img1");
                
@@ -53,8 +63,8 @@ var highscore = 0; //where we will be saving our highestScore
 
                     accuracy = Math.ceil(score / shots *100);
 
-                    highscore = 
-                    
+                    highscores.push(score);
+                    Math.max(highscores);
                     //console.log(accuracy);
                     
                     //update scoreboard
@@ -68,11 +78,3 @@ var highscore = 0; //where we will be saving our highestScore
 
                 moveIt();
             };
-            
-
-
-
-
-
-
-
