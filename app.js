@@ -4,77 +4,335 @@ console.log("inside js");
 // Game Over once 10 hits have been achieved on zombie
 var timer1 = null;
 
-var el=null;
-var score= 0; //number of 'hits'
+var el = null;
+var score = 0; //number of 'hits'
 var shots = 0; //total 'shots'
 var accuracy = 0; // Accuracy of shots to zombie hits
 var zHits = 0; // amount of zombie hits
 var highscores = []; //where we will be saving our highestScore
 
 
-            
-            function moveIt(){
-                //animate the image
-                if(parseInt(el.style.left) > (screen.width - 50)) el.style.left = 0;
-                el.style.left = parseInt(el.style.left)+6+'px';
-                el.style.top = 20 + (80 * Math.sin(parseInt(el.style.left)/50)) + 'px';
-                
-                //set the timer1
-                timer1=setTimeout(moveIt,25);
-            }
-                    
-            function scoreUp(){
-                //increment the player's score
-                score ++;
-                //increment the amount of zombie hits
-                zHits++;
-            }
-            
-            function scoreboard(){
-                //display the scoreboard
-                
-                $("#score").html("<h3>Shots: "+shots + " Score: " + score + " </h3>" + "<h3>Accuracy: " + accuracy + "% Highscore: " + highscores + "</h3>");
-                $("#stats").html();
-            }
-            
-            /*$("#img1").on("click",function(){
-                shots ++;
-                if (score === 10){
-                    console.log("this maybe working.");
-                    shots = highscores;
-                    accuracy = Math.ceil(score / shots *100);
-                    el=document.getElementById("img1");
-                }
-            })*/
 
-            window.onload=function(){
-                el=document.getElementById("img1");
-               
-                //onclick handler calls scoreUp()
-                //when img is clicked
-                el.onclick = scoreUp;
-                
-                
-                //Update total of number of shots
-                //for every click within play field accuracy is adjusted
+function moveIt() {
+  //animate the image
+  if (parseInt(el.style.left) > (screen.width - 50)) el.style.left = 0;
+  el.style.left = parseInt(el.style.left) + 6 + 'px';
+  el.style.top = 20 + (80 * Math.sin(parseInt(el.style.left) / 50)) + 'px';
 
-                $("#range").on("click",function(){
-                    shots++;
+  //set the timer1
+  timer1 = setTimeout(moveIt, 25);
+}
 
-                    accuracy = Math.ceil(score / shots *100);
 
-                    highscores.push(score);
-                    Math.max(highscores);
-                    //console.log(accuracy);
-                    
-                    //update scoreboard
-                    scoreboard();
-                } )
 
-                
-                //Initialize game
-                scoreboard();
-                el.style.left = '50px'
 
-                moveIt();
-            };
+function scoreUp() {
+  //increment the player's score
+  score++;
+  //increment the amount of zombie hits
+  zHits++;
+}
+
+function scoreboard() {
+  //display the scoreboard
+
+  $("#score").html("<h3>Shots: " + shots + " Score: " + score + " </h3>" + "<h3>Accuracy: " + accuracy + "% Highscore: " + highscores + "</h3>");
+  $("#stats").html();
+}
+
+/*$("#img1").on("click",function(){
+    shots ++;
+    if (score === 10){
+        console.log("this maybe working.");
+        shots = highscores;
+        accuracy = Math.ceil(score / shots *100);
+        el=document.getElementById("img1");
+    }
+})*/
+
+window.onload = function () {
+  el = document.getElementById("img1");
+
+  //onclick handler calls scoreUp()
+  //when img is clicked
+  el.onclick = scoreUp;
+
+
+  //Update total of number of shots
+  //for every click within play field accuracy is adjusted
+
+  $("#range").on("click", function () {
+    shots++;
+
+    accuracy = Math.ceil(score / shots * 100);
+
+    highscores.push(score);
+    Math.max(highscores);
+    //console.log(accuracy);
+
+    //update scoreboard
+    scoreboard();
+  })
+
+
+  //Initialize game
+  scoreboard();
+  el.style.left = '50px'
+
+  moveIt();
+};
+
+
+
+
+
+
+//---------------------------DB Listeners-----------------------------
+
+//DB Listener to listen for changes
+//player one listener
+db.ref("/players/").on("value", function (snapshot) {
+  // Check the database for player1
+  if (snapshot.child("player1").exists()) {
+    console.log("Player 1 exists");
+
+    // Player1 data FB
+    player1 = snapshot.val().player1;
+    player1Name = player1.name;
+
+    //Player1 Display
+    $("#playerOneName").text(player1Name);
+    //NOTE: add Kenneths game scoreboard logic at the bottom to reflect the updated score
+    $("#player1Stats").html("Highscore: " + player1.highscore + ", Accuracy: " + player1.accuracy);
+  } else {
+    //console.log("Player 1 is not here");
+
+    player1 = null;
+    player1Name = "";
+
+    // Update player1 display
+    $("#playerOneName").text("Waiting for Player 1");
+    $("#playerPanel1").removeClass("playerPanelTurn");
+    $("#playerPanel2").removeClass("playerPanelTurn");
+
+    //DB outcome
+    db.ref("/outcome").remove();
+    //html outcome
+    $("#roundOutcome").html("Zombie-Game");
+    $("#waitingNotice").html("");
+    $("#player1Stats").html("Highscore: 0, Accuracy: 0%");
+  }
+
+  // ------------------player 2 listener--------------------------------
+
+  // Check the database for player2
+  if (snapshot.child("player2").exists()) {
+    console.log("Player 2 exists");
+
+    // Player2 data FB
+    player2 = snapshot.val().player2;
+    player2Name = player2.name;
+
+    // Update player2 display
+    $("#playerTwoName").text(player2Name);
+    ////NOTE: add Kenneths game scoreboard logic at the bottom to reflect the updated score
+    $("#player2Stats").html("Highscore: " + player2.highscore + ", Accuracy: " + player2.accuracy);
+  } else {
+    // console.log("Player 2 is not available");
+
+    player2 = null;
+    player2Name = "";
+
+    // Update player2 display
+    $("#playerTwoName").text("Waiting for Player 2");
+    $("#playerPanel1").removeClass("playerPanelTurn");
+    $("#playerPanel2").removeClass("playerPanelTurn");
+
+    //DB outcome
+    db.ref("/outcome/").remove();
+    //html outcome
+    $("#roundOutcome").html("Zombie-Game");
+    $("#waitingNotice").html("");
+    $("#player2Stats").html("Highscore: 0, Accuracy: 0%");
+  }
+
+
+  // If both players leave the game, empty the chat session
+  if (!player1 && !player2) {
+    db.ref("/chat/").remove();
+    db.ref("/turn/").remove();
+    db.ref("/outcome/").remove();
+    //empty the html chat session
+    $("#chatDisplay").empty();
+    $("#playerPanel1").removeClass("playerPanelTurn");
+    $("#playerPanel2").removeClass("playerPanelTurn");
+    $("#roundOutcome").html("Zombie-Game");
+    $("#waitingNotice").html("");
+  }
+
+});
+
+
+
+//------------End of Listening for Changes----------------------------
+
+
+
+
+
+
+//------------------Beginning of DB listener for players leaving------
+// DB Listener for players leaving
+db.ref("/players/").on("child_removed", function (snapshot) {
+  var msg = snapshot.val().name + " has left the game!";
+
+  // Get a key for the disconnection chat entry
+  var chatKey = db.ref().child("/chat/").push().key;
+
+  // Save the disconnection chat entry
+  db.ref("/chat/" + chatKey).set(msg);
+});
+
+// Attach a listener to the database /chat/ node to listen for any new chat messages
+db.ref("/chat/").on("child_added", function (snapshot) {
+  var chatMsg = snapshot.val();
+  var chatEntry = $("<div>").html(chatMsg);
+
+  // Change the color of the chat message depending on user or connect/disconnect event
+
+  //update the html chat box with scroll bar
+  $("#chatDisplay").append(chatEntry);
+  $("#chatDisplay").scrollTop($("#chatDisplay")[0].scrollHeight);
+});
+
+//----------------------End of listener-------------------------------
+
+
+
+
+
+
+
+// DB Listener for the game outcome
+db.ref("/outcome/").on("value", function (snapshot) {
+  $("#roundOutcome").html(snapshot.val());
+});
+
+
+
+
+
+
+
+
+//-----------------------Beginning of event handler-----------------
+
+//Event Handler for the new user (submit button)
+$("#add-name").on("click", function (event) {
+  event.preventDefault();
+
+  // First, make sure that the name field is non-empty and we are still waiting for a player
+  if (($("#name-input").val().trim() !== "") && !(player1 && player2)) {
+    // Adding player1
+    if (player1 === null) {
+      //console.log("adding player 1");
+
+      yourPlayerName = $("#name-input").val().trim();
+      //DB game score update
+      player1 = {
+        name: yourPlayerName,
+        highscore: 0,
+        accuracy: 0
+      };
+
+      // Add player1 to the DB
+      db.ref().child("/players/player1").set(player1);
+
+
+      // Set the turn value to 1 in DB
+      db.ref().child("/turn").set(1);
+
+      // Remove the user from the database once disconnected
+      db.ref("/players/player1").onDisconnect().remove();
+    } else if ((player1 !== null) && (player2 === null)) {
+      // Adding player2
+      //console.log("adding player 2");
+
+
+      yourPlayerName = $("#name-input").val().trim();
+      //DB game score update
+      player2 = {
+        name: yourPlayerName,
+        highscore: 0,
+        accuracy: 0
+      };
+
+      // Add player2 to the DB
+      db.ref().child("/players/player2").set(player2);
+
+      // Remove the user from the database once disconnected
+      db.ref("/players/player2").onDisconnect().remove();
+    }
+
+    // Add a user joining message to the chat
+    var msg = yourPlayerName + " has joined the game!";
+    //console.log(msg);
+
+    // Get a key for the join chat entry
+    var chatKey = db.ref().child("/chat/").push().key;
+
+    // DB Join chat entry
+    db.ref("/chat/" + chatKey).set(msg);
+
+    // Reset the name input box
+    $("#name-input").val("");
+  }
+});
+
+
+
+//------------------------end of event handler----------------------
+
+
+
+
+
+
+//Chat send Button
+$("#chat-send").on("click", function (event) {
+  event.preventDefault();
+
+  //If player exists and the message box is not empty
+  if ((yourPlayerName !== "") && ($("#chat-input").val().trim() !== "")) {
+    //Reset the input box by grabbing the message
+    var msg = yourPlayerName + ": " + $("#chat-input").val().trim();
+    $("#chat-input").val("");
+
+    // Key for the new chat entry
+    var chatKey = db.ref().child("/chat/").push().key;
+
+    // New chat entry
+    db.ref("/chat/" + chatKey).set(msg);
+  }
+});
+
+
+
+//--------------Kenneths gamescore update logic-------------
+// function zombieGame(){
+
+//     db.ref().child("/outcome/").set("Highscore");
+//     db.ref().child("/outcome/").set("Accuracy");
+
+//     db.ref().child("/players/player1").set(player1.highscore + 1);
+//     db.ref().child("/players/player1").set(player1.accuracy + 1);
+
+//     db.ref().child("/players/player2").set(player2.highscore + 1);
+//     db.ref().child("/players/player2").set(player2.accuracy + 1);
+
+
+
+
+// };
+
+
