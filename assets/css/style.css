@@ -55,12 +55,51 @@ h1{
 
 
 #container{
-	margin-left: 200px;
+    margin-left: 200px;
 }
 
 #query{
-	margin-left: 200px;
+    margin-left: 200px;
 }
+
+
+.playerPanel .panelName {
+    height: 65px;
+    background-color: grey;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.playerPanel .panelName h3 {
+    font-size: 25px;
+    color: white;
+    margin: 0.25em 0em 0em 0em;
+}
+
+.playerPanel .panelOption {
+    height: 50px;
+    background-color: black;
+    font-weight: normal;
+    font-size: 1.5em;
+    color: white;
+}
+
+
+.playerPanel .panelStats{
+    background-color: grey;
+    color: white;
+    font-weight: normal;
+}
+
+.gamePanel h3{
+    font-size: 30px;
+    background-color: black;
+    color: white;
+}
+
+
+
 
 
 #chatDisplay {

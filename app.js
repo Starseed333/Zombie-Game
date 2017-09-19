@@ -8,8 +8,9 @@ var timer1 = null;
 var score = 0; //number of 'hits'
 var shots = 0; //total 'shots'
 var accuracy = 0; // Accuracy of shots to zombie hits
-var zHits = 0; // amount of zombie hits
-var highscores = []; //where we will be saving our highestScore
+var zHits = 10; // amount of zombie hits
+var highscores= []; //where we will be saving our highestScore
+
 var player1 = null;
 var player2 = null;
 var player1Name = "";
@@ -53,8 +54,7 @@ function ZombieGame() {
   $("#range").on("click", function () {
     shots++;
     accuracy = Math.ceil(score / shots * 100);
-    highscores.push(score);
-    Math.max(highscores);
+    highscores++;
     //console.log(accuracy);
     //update scoreboard
     scoreboard();
@@ -89,6 +89,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
+//firebase
 var db = firebase.database()
 
 function scoreUp() {
@@ -100,63 +101,20 @@ function scoreUp() {
 
 function scoreboard() {
   //display the scoreboard
+  // db.ref().child("/outcome/").set(player1.shots);
+  $("#player1Stats").html("<h3>Shots: " + shots + " Score: " + score + " </h3>" + "<h3>Accuracy: " + accuracy + "% Highscore: " + highscores + "</h3>");
 
-  $("#score").html("<h3>Shots: " + shots + " Score: " + score + " </h3>" + "<h3>Accuracy: " + accuracy + "% Highscore: " + highscores + "</h3>");
-  $("#stats").html();
+
+  // db.ref().child("/outcome/").set(player2.shots);
+  $("#player2Stats").html("<h3>Shots: " + shots + " Score: " + score + " </h3>" + "<h3>Accuracy: " + accuracy + "% Highscore: " + highscores + "</h3>");
 }
 
-/*$("#img1").on("click",function(){
-    shots ++;
-    if (score === 10){
-        console.log("this maybe working.");
-        shots = highscores;
-        accuracy = Math.ceil(score / shots *100);
-        el=document.getElementById("img1");
-    }
-})*/
-
-// window.onload = function () {
-//   el = document.getElementById("img1");
-
-//   //onclick handler calls scoreUp()
-//   //when img is clicked
-//   el.onclick = scoreUp;
-
-
-//   //Update total of number of shots
-//   //for every click within play field accuracy is adjusted
-
-//   $("#range").on("click", function () {
-//     shots++;
-
-//     accuracy = Math.ceil(score / shots * 100);
-
-//     highscores.push(score);
-//     Math.max(highscores);
-//     //console.log(accuracy);
-
-//     //update scoreboard
-//     scoreboard();
-//   })
-
-
-//   //Initialize game
-//   scoreboard();
-//   el.style.left = '50px'
-
-//   moveIt();
-// };
-
-
-            
-                
-            
 
 //---------------------------DB Listeners-----------------------------
 
 //DB Listener to listen for changes
 //player one listener
-db.ref("/players/").on("value", function (snapshot) {
+db.ref("/players/").on("value", function(snapshot) {
   // Check the database for player1
   if (snapshot.child("player1").exists()) {
     console.log("Player 1 exists");
@@ -167,11 +125,11 @@ db.ref("/players/").on("value", function (snapshot) {
 
     //Player1 Display
     $("#playerOneName").text(player1Name);
-    //NOTE: add Kenneths game scoreboard logic at the bottom to reflect the updated score
-    $("#player1Stats").html("Highscore: " + player1.highscore + ", Accuracy: " + player1.accuracy);
+    
+    $("#player1Stats").html("Highscore: " + player1.highscores + ", Accuracy: " + player1.accuracy );
   } else {
     //console.log("Player 1 is not here");
-
+    
     player1 = null;
     player1Name = "";
 
@@ -179,7 +137,7 @@ db.ref("/players/").on("value", function (snapshot) {
     $("#playerOneName").text("Waiting for Player 1");
     $("#playerPanel1").removeClass("playerPanelTurn");
     $("#playerPanel2").removeClass("playerPanelTurn");
-
+    
     //DB outcome
     db.ref("/outcome").remove();
     //html outcome
@@ -188,7 +146,7 @@ db.ref("/players/").on("value", function (snapshot) {
     $("#player1Stats").html("Highscore: 0, Accuracy: 0%");
   }
 
-  // ------------------player 2 listener--------------------------------
+// ------------------player 2 listener--------------------------------
 
   // Check the database for player2
   if (snapshot.child("player2").exists()) {
@@ -201,10 +159,10 @@ db.ref("/players/").on("value", function (snapshot) {
     // Update player2 display
     $("#playerTwoName").text(player2Name);
     ////NOTE: add Kenneths game scoreboard logic at the bottom to reflect the updated score
-    $("#player2Stats").html("Highscore: " + player2.highscore + ", Accuracy: " + player2.accuracy);
+    $("#player2Stats").html("Highscore: " + player2.highscores + ", Accuracy: " + player2.accuracy);
   } else {
-    // console.log("Player 2 is not available");
-
+   // console.log("Player 2 is not available");
+    
     player2 = null;
     player2Name = "";
 
@@ -212,7 +170,7 @@ db.ref("/players/").on("value", function (snapshot) {
     $("#playerTwoName").text("Waiting for Player 2");
     $("#playerPanel1").removeClass("playerPanelTurn");
     $("#playerPanel2").removeClass("playerPanelTurn");
-
+    
     //DB outcome
     db.ref("/outcome/").remove();
     //html outcome
@@ -221,7 +179,7 @@ db.ref("/players/").on("value", function (snapshot) {
     $("#player2Stats").html("Highscore: 0, Accuracy: 0%");
   }
 
-
+ 
   // If both players leave the game, empty the chat session
   if (!player1 && !player2) {
     db.ref("/chat/").remove();
@@ -234,7 +192,7 @@ db.ref("/players/").on("value", function (snapshot) {
     $("#roundOutcome").html("Zombie-Game");
     $("#waitingNotice").html("");
   }
-
+  
 });
 
 
@@ -248,7 +206,7 @@ db.ref("/players/").on("value", function (snapshot) {
 
 //------------------Beginning of DB listener for players leaving------
 // DB Listener for players leaving
-db.ref("/players/").on("child_removed", function (snapshot) {
+db.ref("/players/").on("child_removed", function(snapshot) {
   var msg = snapshot.val().name + " has left the game!";
 
   // Get a key for the disconnection chat entry
@@ -259,7 +217,7 @@ db.ref("/players/").on("child_removed", function (snapshot) {
 });
 
 // Attach a listener to the database /chat/ node to listen for any new chat messages
-db.ref("/chat/").on("child_added", function (snapshot) {
+db.ref("/chat/").on("child_added", function(snapshot) {
   var chatMsg = snapshot.val();
   var chatEntry = $("<div>").html(chatMsg);
 
@@ -279,23 +237,29 @@ db.ref("/chat/").on("child_added", function (snapshot) {
 
 
 // DB Listener for the game outcome
-db.ref("/").on("value", function (snapshot) {
+db.ref("/outcome/").on("value", function(snapshot) {
   $("#roundOutcome").html(snapshot.val());
 });
 
 
+
+
+
+
+
+
 //-----------------------Beginning of event handler-----------------
 
-//Event Handler for the new user (submit button)
-$("#add-name").on("click", function (event) {
+ //Event Handler for the new user (submit button)
+$("#add-name").on("click", function(event) {
   event.preventDefault();
 
   // First, make sure that the name field is non-empty and we are still waiting for a player
-  if (($("#name-input").val().trim() !== "") && !(player1 && player2)) {
+  if ( ($("#name-input").val().trim() !== "") && !(player1 && player2) ) {
     // Adding player1
     if (player1 === null) {
       //console.log("adding player 1");
-
+      
       yourPlayerName = $("#name-input").val().trim();
       //DB game score update
       player1 = {
@@ -313,11 +277,11 @@ $("#add-name").on("click", function (event) {
 
       // Remove the user from the database once disconnected
       db.ref("/players/player1").onDisconnect().remove();
-    } else if ((player1 !== null) && (player2 === null)) {
+    } else if( (player1 !== null) && (player2 === null) ) {
       // Adding player2
       //console.log("adding player 2");
 
-
+      
       yourPlayerName = $("#name-input").val().trim();
       //DB game score update
       player2 = {
@@ -344,7 +308,7 @@ $("#add-name").on("click", function (event) {
     db.ref("/chat/" + chatKey).set(msg);
 
     // Reset the name input box
-    $("#name-input").val("");
+    $("#name-input").val(""); 
   }
 });
 
@@ -358,11 +322,11 @@ $("#add-name").on("click", function (event) {
 
 
 //Chat send Button
-$("#chat-send").on("click", function (event) {
+$("#chat-send").on("click", function(event) {
   event.preventDefault();
 
   //If player exists and the message box is not empty
-  if ((yourPlayerName !== "") && ($("#chat-input").val().trim() !== "")) {
+  if ( (yourPlayerName !== "") && ($("#chat-input").val().trim() !== "") ) {
     //Reset the input box by grabbing the message
     var msg = yourPlayerName + ": " + $("#chat-input").val().trim();
     $("#chat-input").val("");
@@ -376,11 +340,41 @@ $("#chat-send").on("click", function (event) {
 });
 
 
+            
+                
+            
 
-//--------------Kenneths gamescore update logic-------------
-// function zombieGame(){
 
-//     db.ref().child("/outcome/").set("Highscore");
+
+
+//--------------Gamescore update logic-------------
+ // function zombieGame(){
+ //  if(player1.zhits === "10"){
+ //  if(player2.zhits === "10"){
+  
+ //  db.ref().child("/outcome/").set("Reached Z-hits");
+ //  db.ref().child("/players/player1/zHits").set(player1.zHits + 1);
+ //  db.ref().child("players/player1/zHits").set(player2.zHits + 1);
+
+ //  } else if (player1.highscore === "10") {
+   
+
+ //      db.ref().child("/outcome/").set("You Won!");
+ //      db.ref().child("/players/player1/highscore").set(player1.highscore + 1);
+ //      db.ref().child("/players/player2/highscore").set(player2.highscore + 1);
+ //    } else  if (player2.highscore === "10"){
+
+ //      db.ref().child("/outcome/").set("You Won!");
+ //      db.ref().child("/players/player1/highscore").set(player1.highscore + 1);
+ //      db.ref().child("/players/player2/highscore").set(player2.highscore + 1);
+ //    } 
+
+  
+
+ //  };
+
+
+
 //     db.ref().child("/outcome/").set("Accuracy");
 
 //     db.ref().child("/players/player1").set(player1.highscore + 1);
@@ -396,4 +390,4 @@ $("#chat-send").on("click", function (event) {
 
 document.addEventListener('DOMContentLoaded', function(event) {
   new ZombieGame()
-})
+});
