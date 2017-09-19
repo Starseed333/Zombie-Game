@@ -8,8 +8,8 @@ var timer1 = null;
 var score = 0; //number of 'hits'
 var shots = 0; //total 'shots'
 var accuracy = 0; // Accuracy of shots to zombie hits
-var zHits = 10; // amount of zombie hits
-var highscores= []; //where we will be saving our highestScore
+//var zHits = 10; // amount of zombie hits
+//var highscores= shots; //where we will be saving our highestScore
 
 var player1 = null;
 var player2 = null;
@@ -17,6 +17,7 @@ var player1Name = "";
 var player2Name = "";
 var yourPlayerName = "";
 var zombieImage = document.getElementById('img1')
+var iAM;
 
 var zombieInterval;
  
@@ -54,14 +55,27 @@ function ZombieGame() {
   $("#range").on("click", function () {
     shots++;
     accuracy = Math.ceil(score / shots * 100);
-    highscores++;
+    //highscores++;
+
+
+
+    var newscore = {"shots": shots,
+                "accuracy": accuracy
+                };
+    console.log("rangeclicked");
+    console.log(newscore);
     //console.log(accuracy);
     //update scoreboard
-    scoreboard();
-  })
+   
+    // find if I am player1 or player 2
+    //var iAM = "player1"; // or "player2"
+    db.ref('/players/'+iAM).set(newscore);
+
+
+  });
 
   //Initialize game
-  scoreboard();
+  // scoreboard();
   el.style.left = '50px'
 }
 
@@ -126,7 +140,7 @@ db.ref("/players/").on("value", function(snapshot) {
     //Player1 Display
     $("#playerOneName").text(player1Name);
     
-    $("#player1Stats").html("Highscore: " + player1.highscores + ", Accuracy: " + player1.accuracy );
+    $("#player1Stats").html("Shots: " + player1.shots + ", Accuracy: " + player1.accuracy );
   } else {
     //console.log("Player 1 is not here");
     
@@ -143,7 +157,7 @@ db.ref("/players/").on("value", function(snapshot) {
     //html outcome
     $("#roundOutcome").html("Zombie-Game");
     $("#waitingNotice").html("");
-    $("#player1Stats").html("Highscore: 0, Accuracy: 0%");
+    $("#player1Stats").html("Shots: 0, Accuracy: 0%");
   }
 
 // ------------------player 2 listener--------------------------------
@@ -159,7 +173,7 @@ db.ref("/players/").on("value", function(snapshot) {
     // Update player2 display
     $("#playerTwoName").text(player2Name);
     ////NOTE: add Kenneths game scoreboard logic at the bottom to reflect the updated score
-    $("#player2Stats").html("Highscore: " + player2.highscores + ", Accuracy: " + player2.accuracy);
+    $("#player2Stats").html("Shots: " + player2.shots + ", Accuracy: " + player2.accuracy);
   } else {
    // console.log("Player 2 is not available");
     
@@ -176,7 +190,7 @@ db.ref("/players/").on("value", function(snapshot) {
     //html outcome
     $("#roundOutcome").html("Zombie-Game");
     $("#waitingNotice").html("");
-    $("#player2Stats").html("Highscore: 0, Accuracy: 0%");
+    $("#player2Stats").html("Shots: 0, Accuracy: 0%");
   }
 
  
@@ -261,10 +275,11 @@ $("#add-name").on("click", function(event) {
       //console.log("adding player 1");
       
       yourPlayerName = $("#name-input").val().trim();
+      iAM = "player1";
       //DB game score update
       player1 = {
         name: yourPlayerName,
-        highscore: 0,
+        shots: 0,
         accuracy: 0
       };
 
@@ -281,12 +296,12 @@ $("#add-name").on("click", function(event) {
       // Adding player2
       //console.log("adding player 2");
 
-      
+      iAM = "player2";
       yourPlayerName = $("#name-input").val().trim();
       //DB game score update
       player2 = {
         name: yourPlayerName,
-        highscore: 0,
+        shots: 0,
         accuracy: 0
       };
 
