@@ -1,10 +1,9 @@
 console.log("inside js");
 
 // Zombie Timer
-// Game Over once 10 hits have been achieved on zombie
 var timer1 = null;
 
-// var el = null;
+
 var score = 0; //number of 'hits'
 var shots = 0; //total 'shots'
 var accuracy = 0; // Accuracy of shots to zombie hits
@@ -44,9 +43,7 @@ function ZombieGame() {
   this.zombieImage = document.getElementById('img1')
   var el = document.getElementById("img1");
 
-  //onclick handler calls scoreUp()
-  //when img is clicked
-  // el.onclick = scoreUp;
+  
   this.zombieImage.addEventListener('click', this.MoveZombie)
 
   //Update total of number of shots
@@ -56,27 +53,21 @@ function ZombieGame() {
     shots++;
     accuracy = Math.ceil(score / shots * 100);
     //highscores++;
-
-
-
+    //update firebase scoreboard
     var newscore = {"shots": shots,
                 "accuracy": accuracy
                 };
     console.log("rangeclicked");
     console.log(newscore);
-    //console.log(accuracy);
-    //update scoreboard
-   
-    // find if I am player1 or player 2
+  
+    
     //var iAM = "player1"; // or "player2"
-    db.ref('/players/'+iAM).set(newscore);
+    db.ref("/players/" + iAM).set(newscore);
 
 
   });
 
-  //Initialize game
-  // scoreboard();
-  el.style.left = '50px'
+    el.style.left = '50px'
 }
 
 ZombieGame.prototype.MoveZombie = function(event) {
@@ -110,7 +101,7 @@ function scoreUp() {
   //increment the player's score
   score++;
   //increment the amount of zombie hits
-  zHits++;
+  //zHits++;
 }
 
 function scoreboard() {
@@ -197,7 +188,6 @@ db.ref("/players/").on("value", function(snapshot) {
   // If both players leave the game, empty the chat session
   if (!player1 && !player2) {
     db.ref("/chat/").remove();
-    db.ref("/turn/").remove();
     db.ref("/outcome/").remove();
     //empty the html chat session
     $("#chatDisplay").empty();
@@ -235,7 +225,7 @@ db.ref("/chat/").on("child_added", function(snapshot) {
   var chatMsg = snapshot.val();
   var chatEntry = $("<div>").html(chatMsg);
 
-  // Change the color of the chat message depending on user or connect/disconnect event
+
 
   //update the html chat box with scroll bar
   $("#chatDisplay").append(chatEntry);
@@ -355,54 +345,12 @@ $("#chat-send").on("click", function(event) {
 });
 
 
-            
-                
-            
-
-
-
-
-//--------------Gamescore update logic-------------
- // function zombieGame(){
- //  if(player1.zhits === "10"){
- //  if(player2.zhits === "10"){
-  
- //  db.ref().child("/outcome/").set("Reached Z-hits");
- //  db.ref().child("/players/player1/zHits").set(player1.zHits + 1);
- //  db.ref().child("players/player1/zHits").set(player2.zHits + 1);
-
- //  } else if (player1.highscore === "10") {
-   
-
- //      db.ref().child("/outcome/").set("You Won!");
- //      db.ref().child("/players/player1/highscore").set(player1.highscore + 1);
- //      db.ref().child("/players/player2/highscore").set(player2.highscore + 1);
- //    } else  if (player2.highscore === "10"){
-
- //      db.ref().child("/outcome/").set("You Won!");
- //      db.ref().child("/players/player1/highscore").set(player1.highscore + 1);
- //      db.ref().child("/players/player2/highscore").set(player2.highscore + 1);
- //    } 
-
-  
-
- //  };
-
-
-
-//     db.ref().child("/outcome/").set("Accuracy");
-
-//     db.ref().child("/players/player1").set(player1.highscore + 1);
-//     db.ref().child("/players/player1").set(player1.accuracy + 1);
-
-//     db.ref().child("/players/player2").set(player2.highscore + 1);
-//     db.ref().child("/players/player2").set(player2.accuracy + 1);
-
-
-
-
-// };
-
 document.addEventListener('DOMContentLoaded', function(event) {
   new ZombieGame()
 });
+
+
+
+
+
+

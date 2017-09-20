@@ -15,6 +15,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+    <!-- Game Timer -->
+     <h1 class="nav navbar navbar-right" id="game-timer">Time to shoot: <span id="count">30</span> seconds...</h1>
+
+
+
+
     </head>
 
 
@@ -24,6 +30,21 @@
   
 
 <body>
+
+    <div id="clouds">
+    <div class="cloud x1"></div>
+    <!-- Time for multiple clouds to dance around -->
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+
+    </div>
+
+
+    
+
+
     <div class="container">
     <!-- Player Enter Your Name Section -->
         <div class="formPanel"> 
@@ -51,10 +72,10 @@
     </div>
 
 
-
-    <img id="cow1" src="https://i.imgur.com/V4otTTg.png" class="animated bounce" width=10%/>
+    <img id ="zombie" src="http://johndopp.com/wp-content/uploads/plantsvszombies_png.png" class="animated bounce" width=6%>
+    <img id="cow1" src="https://i.imgur.com/V4otTTg.png" class="animated wobble" width=10%/>
     <img id="cow2" src="https://i.imgur.com/Tx3Ve6s.png" class="animated fadeInLeft" width=10%/>
-    <img id="cow3" src="https://i.imgur.com/DxqSOfR.png" class="animated fadeInLeft" width=10%/>
+    <!-- <img id="cow3" src="https://i.imgur.com/DxqSOfR.png" class="animated wobble" width=8%/> -->
     
 
 
@@ -154,6 +175,61 @@
 
 
 
+    <!--Social Media Buttons-->
+    <div class="mediabuttons">
+        <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook"/>
+        </a>
+
+        <a href="https://plus.google.com/share?url=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+        </a>
+
+        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+        </a>
+
+        <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+        </a>
+    </div>
+
+
+
+
+
+
+
+
+       <!-- Game Timer JS -->
+         <script type="text/javascript">
+
+              window.onload = function(){
+
+              (function(){
+                var counter = 30;
+
+                setInterval(function() {
+                  counter--;
+                  if (counter >= 0) {
+                    span = document.getElementById("count");
+                    span.innerHTML = counter;
+                  }
+                  // Display 'counter' wherever you want to display it.
+                  if (counter === 0) {
+                      alert('Game Over!');
+                      clearInterval(counter);
+                  }
+
+                }, 1000);
+
+              })();
+
+              }
+
+            </script>
+      
+
 
 
 
@@ -164,6 +240,7 @@
 
 <!-- JS File -->
 <script src="app.js"></script>
+<script src="api.js"></script>
 
 
 </body>
