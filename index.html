@@ -16,17 +16,47 @@
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
     <!-- Game Timer -->
-     <h1 class="nav navbar navbar-right" id="game-timer">Time to shoot: <span id="count">30</span> seconds...</h1>
-
-
-
-
     </head>
 
 
 
 
-</head>
+<header>
+<div class="row">
+<div class="col-lg12">
+    
+      <nav class="navbar navbar-light bg-faded">
+          <a class="navbar-brand" href="#">
+            <img src="assets/images/header_Image.png" height="50" alt="">
+          </a>
+                <div class="nav navbar navbar-left">
+
+               <h1 id="game-timer">Time to shoot: <span id="count">30</span> seconds...</h1>
+
+                       </div>
+
+
+                    <div class="nav navbar navbar-right mediabuttons">
+                        <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
+                        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook"/>
+                        </a>
+
+                        <a href="https://plus.google.com/share?url=https://simplesharebuttons.com" target="_blank">
+                        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                        </a>
+
+                        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://simplesharebuttons.com" target="_blank">
+                        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+                        </a>
+
+                        <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
+                        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                        </a>
+                    </div>
+    </nav>
+</div>
+</div>
+</header>
   
 
 <body>
@@ -47,12 +77,7 @@
 
     <div class="container">
     <!-- Player Enter Your Name Section -->
-        <div class="formPanel"> 
-            <form id="name-form">
-                <input type="text" id="name-input" placeholder="Your Name">
-                <input id="add-name" type="submit" value="Submit">
-            </form>
-        </div> <!-- End Player Name Section  -->
+<!-- End Player Name Section  -->
 
 
   
@@ -64,79 +89,46 @@
              <div id="score"></div>
              <div id="stats"></div>
              <img alt="FIRE!" id="img1" src="https://vignette1.wikia.nocookie.net/plantsvszombies/images/1/14/JetpackZombieHD.png/revision/latest?cb=20140521234908" width=13%;/>
-
-
-
-
-         
-    </div>
-
-
-    <img id ="zombie" src="http://johndopp.com/wp-content/uploads/plantsvszombies_png.png" class="animated bounce" width=6%>
-    <img id="cow1" src="https://i.imgur.com/V4otTTg.png" class="animated wobble" width=10%/>
-    <img id="cow2" src="https://i.imgur.com/Tx3Ve6s.png" class="animated fadeInLeft" width=10%/>
-    <!-- <img id="cow3" src="https://i.imgur.com/DxqSOfR.png" class="animated wobble" width=8%/> -->
-    
-
-
-    <!-- Game Data Section -->
+<!-- Game Data Section -->
         <div class="panel panel-default">
-            <div class="row"> <!-- Game Data Row -->
+            <div class="row" id="stats"> <!-- Game Data Row -->
+                <div class="col-lg-11 col-md-11 col-sm-11"></div>
 
                 <!-- Player 1 Left Side -->
-                <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="col-lg-1 col-md-1 col-sm-1">
                     <div class="panel panel-default playerPanel" id="playerPanel1">
                         <div class="panel-heading panelName">
+                            <div class="option">Player 1 Score:</div>
+                        </div>
+
+                        <div class="panel-body panelOption text-center">
                             <h3 class="panel-title text-center" id="playerOneName"></h3>
-                        </div>
 
-                        <div class="panel-body panelOption text-center">
-                            <div class="option">Game</div>
                         </div>
-
-                        <div class="panel-body panelOption text-center">
-                            <div class="option">Score!</div>
-                        </div>
-
 
                         <div class="panel-body panelStats text-center">
                             <div class="stats" id="player1Stats"></div>
                         </div>
                     </div>
                 </div> <!-- End Player 1-->
-                
-                
+            </div>
 
 
 
 
-                 <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="panel panel-default gamePanel">
-                        <h3 class="panel-title text-center" id="waitingNotice"></h3>
-                        <h3 class="panel-title text-center" id="roundOutcome">Zombie - Attack</h3>
-                    </div>
-                </div> 
-                 
-                
+             <div class="row" id="stats"> 
 
-
-
-
+                <div class="col-lg-11 col-md-11 col-sm-11"></div>
                 <!-- Player 2 Right Side -->
-                <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="col-lg-1 col-md-1 col-sm-1">
                     <div class="panel panel-default playerPanel" id="playerPanel2">
                         <div class="panel-heading panelName">
+                            <div class="option">Player 2 Score:</div>                            
+                        </div>
+
+                        <div class="panel-body panelOption text-center">
                             <h3 class="panel-title text-center" id="playerTwoName"></h3>
                         </div>
-
-                        <div class="panel-body panelOption text-center">
-                            <div class="option">Game</div>
-                        </div>
-
-                        <div class="panel-body panelOption text-center">
-                            <div class="option">Score!</div> 
-                        </div>
-
 
                         <div class="panel-body panelStats text-center">
                             <div class="stats" id="player2Stats"></div>
@@ -146,17 +138,62 @@
                 
              </div> <!-- Game Data Row -->
         </div> --> <!-- End Game Data Section  -->
+</div>
+         
+    </div>
 
- 
+    <div class="row">
+    <div class="col-lg-4">
+    <img id ="zombie" src="http://johndopp.com/wp-content/uploads/plantsvszombies_png.png" class="animated bounce" width=6%>
+   </div>
+    <div class="col-lg-4">
+    <img id ="zombie2" src="https://orig13.deviantart.net/6a9a/f/2014/093/8/6/plants_vs_zombies_2_jetpack_disco_zombie_the_zombi_by_illustation16-d7cyrv4.png" class="animated bounce" width=10%>
+    </div>
+    <div class="col-lg-4">
+    <img id ="zombie3" src="https://vignette3.wikia.nocookie.net/plantsvszombies/images/8/86/Amberhead_Zombie.png/revision/latest?cb=20170506203751" class="animated fadeInLeft" width=10%>
+    </div>
+    </div>
+    <!-- <img id="cow3" src="https://i.imgur.com/DxqSOfR.png" class="animated wobble" width=8%/> -->
+
+        <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="nav navbar text-center col-lg-3"> 
+            <form id="name-form">
+                <input type="text" id="name-input" placeholder="Your Name">
+                <input id="add-name" type="submit" value="Submit">
+            </form>
+        </div> 
+        </div>
+        </div>
 
 
+                   
+        
  <!-- Chat Section -->
         <div class="row">
 
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-5 col-md-5 col-sm-5">
                 <div id="chatDisplay"></div>
             </div>
+            <div class="col-lg-2 col-md-2 col-sm-2">
+               
+               <div class="panel panel-default" id="vidPanel">
 
+                        <div id="newPanel"> 
+
+                             <form id="yt-form" onsubmit="go_get(); return false;" >
+
+                                   <input type="text"  id="yourtextfield"/>
+                              
+                                   <input type="submit" value="Search Youtube" id="submit-btn"/>
+                              
+                              </form>
+
+                            <iframe id="youriframe" width="165" height="95" ></iframe>
+ 
+                        </div>
+            </div>
+            </div>
             <div class="col-lg-4 col-md-4 col-sm-4"> 
                 <div class="chatInput">
                     <div class="chatLabel">Type Your Message!</div>
@@ -165,34 +202,17 @@
                         <form id="chat-form">
                             <textarea type="text" id="chat-input"></textarea>
                             <input id="chat-send" type="submit" value="Send">
-                        </form>
+                           </form>
+                       </div>
                     </div>
-                </div>
-            </div> <!-- End Player Name Section  -->
-
+               </div> <!-- End Player Name Section  -->
+            </div>
        </div>  <!-- End Chat Section  -->
 
 
 
-
     <!--Social Media Buttons-->
-    <div class="mediabuttons">
-        <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
-        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook"/>
-        </a>
 
-        <a href="https://plus.google.com/share?url=https://simplesharebuttons.com" target="_blank">
-        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
-        </a>
-
-        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://simplesharebuttons.com" target="_blank">
-        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
-        </a>
-
-        <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
-        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
-        </a>
-    </div>
 
 
 
@@ -217,7 +237,7 @@
                   }
                   // Display 'counter' wherever you want to display it.
                   if (counter === 0) {
-                      alert('Game Over!');
+                    //  alert('Game Over!');
                       clearInterval(counter);
                   }
 
@@ -231,9 +251,16 @@
       
 
 
-
-
-
+<script type="text/javascript">
+                             function go_get(){
+                               var base_url = 'http://www.youtube.com/embed?listType=search&list=';
+                               var search_field = document.getElementById('yourtextfield').value;
+                               var target_url = base_url + search_field;
+                               var ifr = document.getElementById('youriframe');
+                               ifr.src = target_url;
+                               return false;
+                              }
+</script>
 
 
 
@@ -241,7 +268,7 @@
 <!-- JS File -->
 <script src="app.js"></script>
 <script src="api.js"></script>
-
+<script>setTimeout(function(){window.location.href='Gameover.html'},30000);</script>
 
 </body>
 </html>

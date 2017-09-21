@@ -1,22 +1,36 @@
 body{
-	background-image: url("../images/wd.jpeg");
+	background-image: url("../images/kSQdCxM.jpg");
     background-position: cover;
+    background-size: 100% 100%;
 	
 	}
 
+header {
+    display: inline;
+    padding-top: 20px;
+}
 
+a {
+    margin-right: 10px;
+}
 
 #yourtextfield{
-    margin-top: 500px;
-    margin-left: 20px;
+    margin-top: 350px;
+    margin-left: 10px;
 }
 
 #name-form{
-    margin-top: 900px;
-    margin-left: 200px;
+    display: inline;
+    margin-top: 20px;
+    text-align: center;
 }
 
-
+#name-input {
+    border: transparent solid 1px;
+    border-radius: 5px;
+    height: 30px;
+    margin-top: 20px;
+}
 
 #range{
      position: absolute;
@@ -24,6 +38,7 @@ body{
      cursor: crosshair;
      width: 100%;
      height: 300px;
+     margin-top: 60px;
      }
             
 #img1{
@@ -35,7 +50,7 @@ body{
             
  #score{
      font: 16px normal arial, verdana, sans-serif;
-     color: white;
+     color: #3f3f3f;
      font-weight: bold;
      margin-top: 80px;
      padding: 50px;
@@ -68,7 +83,13 @@ body{
     animation-iteration-count: infinite;
 }
 
+.panel {
+    background: transparent;
+    border: none;
+    border-radius: 5px 5px 0px 0px;
+    margin-right: 5px;
 
+}
 
 #container{
     margin-left: 200px;
@@ -78,43 +99,51 @@ body{
     margin-left: 200px;
 }
 
-
-.playerPanel .panelName {
-    height: 65px;
-    background-color: grey;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 10px 10px 0px 0px;
+.panel-body {
+    padding: 5px;
 }
 
-.playerPanel .panelName h3 {
-    font-size: 25px;
-    color: white;
+.playerPanel .panelName {
+    min-height: 25px;
+    background-color: #fafafa;
+    text-align: center;
+    font-weight: bold;
+    margin-left: auto;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+h3 .playerPanel .panelName  {
+    font-size: 12px;
+    color: #f3f3f3;
     margin: 0.25em 0em 0em 0em;
 }
 
 .playerPanel .panelOption {
-    height: 50px;
+    min-height: 15px;
     background-color: black;
     font-weight: normal;
-    font-size: 1.5em;
-    color: white;
+    font-size: -1.5em;
+    color: #fafafa;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 
 .playerPanel .panelStats{
-    background-color: grey;
-    color: white;
+    background-color: #fafafa;
+    color: #3f3f3f;
     font-weight: normal;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 0px 0px 5px 5px;
+
 }
 
-.gamePanel h3{
-    font-size: 30px;
-    background-color: black;
-    color: white;
+
+h1#game-timer {
+    color: #fafafa;
 }
-
-
 
 
 
@@ -288,9 +317,81 @@ body{
 
 /*Media Buttons Styling*/
 .mediabuttons {
-    text-align: center;
+    text-align: left;
+    display: inline;
+}
+
+a.mediabuttons {
+    display: inline;
+    margin-right: 10px;
 }
 /*End Media Buttons Styling*/
 
+#waitingNotice {
+    background: black;
+}
 
+#newPanel {
+    max-height: 255px;
+    padding-top: 5px;
+    background: #f3f3f3;
+}
 
+iframe {
+    border: transparent; solid 1px;
+    margin-top: 5px;
+}
+
+input#yourtextfield {
+    margin-left: 0;
+    margin-top: 0px;
+    border: #656565 solid 1px;
+    border-radius: 2px;
+    height: 30px;
+    width: 150px;
+
+}
+
+#submit-btn {
+    background: #272618;
+    color: white;
+    border: transparent solid 1px;
+    border-radius: 2px;
+    height: 30px;
+    margin-top: 5px;
+}
+
+#vidPanel {
+    min-height: 35px;
+}
+div#newPanel {
+    border: transparent solid 1px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+}
+
+#zombie, #zombie2, #zombie3 {z-index:500;}
+
+#zombie {
+    position:absolute; 
+    bottom: 50px;
+    left:;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+#zombie2 {
+    position:absolute; 
+    bottom:50px; left:1100px;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+#zombie3{
+    position: absolute;
+    bottom:50px;
+    left: 550px;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
+}
