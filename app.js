@@ -7,8 +7,7 @@ var timer1 = null;
 var score = 0; //number of 'hits'
 var shots = 0; //total 'shots'
 var accuracy = 0; // Accuracy of shots to zombie hits
-//var zHits = 10; // amount of zombie hits
-//var highscores= shots; //where we will be saving our highestScore
+
 
 var player1 = null;
 var player2 = null;
@@ -23,7 +22,7 @@ var zombieInterval;
 function MoveZombie() {
   zombieInterval = setInterval(moveIt, 25)
 }
-
+//Zombie Movement
 function moveIt() {
   if (parseInt(zombieImage.style.left) > (screen.width - 50)) {
     zombieImage.style.left = 0;

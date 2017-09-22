@@ -153,8 +153,7 @@
     <img id ="zombie3" src="https://vignette3.wikia.nocookie.net/plantsvszombies/images/8/86/Amberhead_Zombie.png/revision/latest?cb=20170506203751" class="animated fadeInLeft" width=10%>
     </div>
     </div>
-    <!-- <img id="cow3" src="https://i.imgur.com/DxqSOfR.png" class="animated wobble" width=8%/> -->
-
+    
         <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="nav navbar text-center col-lg-3"> 
@@ -175,9 +174,10 @@
             <div class="col-lg-5 col-md-5 col-sm-5">
                 <div id="chatDisplay"></div>
             </div>
+            <!-- Youtube -->
             <div class="col-lg-2 col-md-2 col-sm-2">
                
-               <div class="panel panel-default" id="vidPanel">
+                  <div class="panel panel-default" id="vidPanel">
 
                         <div id="newPanel"> 
 
@@ -192,7 +192,7 @@
                             <iframe id="youriframe" width="165" height="95" ></iframe>
  
                         </div>
-            </div>
+                  </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4"> 
                 <div class="chatInput">
@@ -205,9 +205,9 @@
                            </form>
                        </div>
                     </div>
-               </div> <!-- End Player Name Section  -->
+               </div> 
             </div>
-       </div>  <!-- End Chat Section  -->
+        <!-- End Chat Section  -->
 
 
 
@@ -250,8 +250,8 @@
             </script>
       
 
-
-<script type="text/javascript">
+                    <!-- Youtube Js -->
+                    <script type="text/javascript">
                              function go_get(){
                                var base_url = 'http://www.youtube.com/embed?listType=search&list=';
                                var search_field = document.getElementById('yourtextfield').value;
@@ -260,7 +260,7 @@
                                ifr.src = target_url;
                                return false;
                               }
-</script>
+                    </script>
 
 
 
@@ -268,6 +268,7 @@
 <!-- JS File -->
 <script src="app.js"></script>
 <script src="api.js"></script>
+<!-- Gameover Image -->
 <script>setTimeout(function(){window.location.href='Gameover.html'},30000);</script>
 
 </body>

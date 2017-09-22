@@ -57,31 +57,6 @@ a {
      z-index: 100;
             }
 
-#cow1, #cow2, #zombie {z-index:500;}
-
-#cow1 {
-    position:absolute; 
-    bottom:50px; 
-    left:;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-
-}
-#cow2 {
-    position:absolute; 
-    bottom:50px; left:900px;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-}
-
-
-#zombie{
-    position: absolute;
-    bottom:50px;
-    left: 350px;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-}
 
 .panel {
     background: transparent;
@@ -98,6 +73,8 @@ a {
 #query{
     margin-left: 200px;
 }
+
+/*Player Panels*/
 
 .panel-body {
     padding: 5px;
@@ -146,7 +123,7 @@ h1#game-timer {
 }
 
 
-
+/*Chat Styling*/
 #chatDisplay {
     height: 150px;
     width: 100%;
@@ -376,7 +353,7 @@ div#newPanel {
 #zombie {
     position:absolute; 
     bottom: 50px;
-    left:;
+    left: 60px;
     animation-duration: 3s;
     animation-iteration-count: infinite;
 }
@@ -394,4 +371,4 @@ div#newPanel {
     animation-iteration-count: infinite;
 }
 
-}
+
