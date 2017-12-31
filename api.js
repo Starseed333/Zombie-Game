@@ -13,7 +13,7 @@ $.ajax({
 .done(function(response) {
 
 	var imgURL = (response[0].urls.full);
-
+		//console.log(imgURL);
 		console.log(response);
 		$("body").css("background-image", "url("+imgURL+")");
 
@@ -22,6 +22,24 @@ $.ajax({
 
 });
 
+
+var delayGame;
+
+var windowTimeout = setTimeout(function(){
+	window.location.href='Gameover.html'
+}, 30000);
+
+$("#start").on("click", function(){
+	delayGame = setTimeout(function(){
+
+
+	}1000);
+});
+
+$("#stop").on("click", function(){
+	clearTimeout(delayGame);
+	clearTimeout(windowTimeout);
+});
  
 
 
